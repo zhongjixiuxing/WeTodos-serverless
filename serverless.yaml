@@ -4,6 +4,7 @@ provider:
   runtime: nodejs10.x
   name: aws
   environment:
+    NODE_ENV: ${self:provider.stage,  'dev'}
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     JWT_PRIVATE_KEY: ${env:JWT_PRIVATE_KEY}
     JWT_PUBLIC_KEY: ${env:JWT_PUBLIC_KEY}
@@ -127,14 +128,14 @@ resources:
             Projection:
               ProjectionType: 'ALL'
         BillingMode: PAY_PER_REQUEST
-        TableName: 'User'
+        TableName: User_${self:provider.stage, 'dev'}
 
     ListDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
         BillingMode: PAY_PER_REQUEST
-        TableName: 'List'
+        TableName: List_${self:provider.stage, 'dev'}
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
@@ -167,7 +168,7 @@ resources:
       DeletionPolicy: Retain
       Properties:
         BillingMode: PAY_PER_REQUEST
-        TableName: 'Task'
+        TableName: Task_${self:provider.stage, 'dev'}
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S

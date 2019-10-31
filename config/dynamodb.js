@@ -1,16 +1,19 @@
+const process = require('process');
+const stage = process.env.NODE_ENV || 'dev';
+
 module.exports = {
     tables: {
         user: {
-            name: 'User',
+            name: `User_${stage}`,
             hashKey: 'id'
         },
         list: {
-            name: 'List',
+            name: `List_${stage}`,
             hashKey: 'id'
         },
         task: {
-            name: 'Task',
+            name: `Task_${stage}`,
             hashKey: 'id'
         }
     }
-}
+};

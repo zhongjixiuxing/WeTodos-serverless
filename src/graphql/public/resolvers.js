@@ -10,6 +10,19 @@ const {login: wxLogin} = require('./wxUtil');
 const appCfg = require('../../../config/appCfg');
 const {GraphQLJSON, GraphQLJSONObject} = require('graphql-type-json');
 
+const initUserData = async (user) => {
+    const params = {
+        TableName: tables.user.name,
+        Item: {
+            id: uuid(),
+            wxOpenId: openId,
+            profile: appCfg.defaultUserProfile
+        }
+    };
+
+    await dynamodb.put(params).promise();
+};
+
 const resolvers = {
     JSON: GraphQLJSON,
     JSONObject: GraphQLJSONObject,
@@ -18,7 +31,7 @@ const resolvers = {
     Mutation: {
         register: async (_, { name, password }) => {
             const query = {
-                TableName: 'User',
+                TableName: tables.user.name,
                 Key: { name },
             };
 
@@ -95,6 +108,12 @@ const resolvers = {
 
                 await dynamodb.put(params).promise();
                 user = params.Item;
+
+                try {
+                    await initUserData(user);
+                } catch (e) {
+                    logger.error('Init User Default Data Error: ', e);
+                }
             } else {
                 user = result.Items[0];
             }

@@ -6,7 +6,7 @@ let slsOfflineProcess;
 
 const tables = {
     user: {
-        name: 'User',
+        name: 'User_dev',
         hashKey: 'name'
     }
 };
