@@ -32,11 +32,19 @@ const resolvers = {
         register: async (_, { name, password }) => {
             const query = {
                 TableName: tables.user.name,
-                Key: { name },
+                IndexName: 'index_name',
+                KeyConditionExpression: "#name = :name",
+                ExpressionAttributeNames: {
+                    "#name": 'name',
+                },
+                ExpressionAttributeValues: {
+                    ":name": name
+                },
+                Limit: 1,
             };
 
-            const result = await dynamodb.get(query).promise();
-            if (result.Item) {
+            const result = await dynamodb.query(query).promise();
+            if (result.Count > 0) {
                 throw new UserInputError(ErrorCodes.NAME_ALREADY_EXISTS);
             }
 
@@ -58,23 +66,31 @@ const resolvers = {
         login: async (_, { name, password }) => {
             const query = {
                 TableName: tables.user.name,
-                Key: { name },
+                IndexName: 'index_name',
+                KeyConditionExpression: "#name = :name",
+                ExpressionAttributeNames: {
+                    "#name": 'name',
+                },
+                ExpressionAttributeValues: {
+                    ":name": name
+                },
+                Limit: 1,
             };
 
-            // get by key scheme (primary key)
-            const result = await dynamodb.get(query).promise();
-            if (!result.Item) {
+            const result = await dynamodb.query(query).promise();
+            if (result.Count !== 1) {
                 throw new UserInputError(ErrorCodes.USER_NAME_NOT_EXISTS);
             }
 
-            if (result.Item.password !== password) {
+            const user = result.Items[0];
+            if (user.password !== password) {
                 throw new UserInputError(ErrorCodes.PASSWORD_ERROR);
             }
 
             return {
-                id: result.Item.id,
-                name: result.Item.name,
-                token: encodeJwt({id: result.Item.id}),
+                id: user.id,
+                name: user.name,
+                token: encodeJwt({id: user.id}),
             }
         },
         wxLogin: async (_, { code }) => {

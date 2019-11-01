@@ -5,12 +5,24 @@ const fetch = require('node-fetch');
 
 const authClient = new ApolloClient({
     link: createHttpLink({ uri: 'http://localhost:3000/auth', fetch}),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
+    defaultOptions: {
+        query: {
+            fetchPolicy: 'no-cache',
+            errorPolicy: 'all',
+        }
+    }
 });
 
 const publicClient = new ApolloClient({
     link: createHttpLink({ uri: 'http://localhost:3000/public', fetch}),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
+    defaultOptions: {
+        query: {
+            fetchPolicy: 'no-cache',
+            errorPolicy: 'all',
+        }
+    }
 });
 
 module.exports = {

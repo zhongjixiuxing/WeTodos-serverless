@@ -24,3 +24,16 @@ $ npm run start
 - CI/CD
 - 删除Service
   1. 在AWS CloudFormation 中找到对应的堆栈点击删除。如果删除遇到错误，根据错误的提示，通常是因为一些资源需要手动去确认删除，例如S3、DynamoDB、Apigateway 中有绑定自定义域名等，去到相关的服务页面将其删除后再返回执行删除操作即可.
+- Test Case 中的apollo-client query 操作是默认查询在缓存中的，要设置不从缓存中查询
+  ```javascript
+      const authClient = new ApolloClient({
+          link: createHttpLink({ uri: 'http://localhost:3000/auth', fetch}),
+          cache: new InMemoryCache(),
+          defaultOptions: {
+              query: {
+                  fetchPolicy: 'no-cache',
+                  errorPolicy: 'all',
+              }
+          }
+      });
+  ```

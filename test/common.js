@@ -4,13 +4,7 @@ const config = require('./config');
 
 let slsOfflineProcess;
 
-const tables = {
-    user: {
-        name: 'User_dev',
-        hashKey: 'name'
-    }
-};
-
+const {tables} = require('../config/dynamodb');
 
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 
