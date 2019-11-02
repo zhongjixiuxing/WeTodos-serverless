@@ -1,0 +1,19 @@
+POST http://localhost:3000/graphql
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+mutation {   login(name: "anxing", password: "anxing") {       id       name       password   } }
+
+<> 2019-09-25T044838.200.json
+
+###
+
+GET http://localhost:3000/graphql
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-09-25T044658.400.json
+
+###
+

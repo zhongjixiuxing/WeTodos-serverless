@@ -1,0 +1,1049 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "The AWS CloudFormation template for this Serverless application",
+  "Resources": {
+    "ServerlessDeploymentBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "PublicDashgraphqlDashhandlerLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/wetodos-dev-public-graphql-handler"
+      }
+    },
+    "AuthDashgraphqlDashhandlerLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/wetodos-dev-auth-graphql-handler"
+      }
+    },
+    "IamRoleLambdaExecution": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": {
+              "Fn::Join": [
+                "-",
+                [
+                  "dev",
+                  "wetodos",
+                  "lambda"
+                ]
+              ]
+            },
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/wetodos-dev*:*"
+                    }
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/wetodos-dev*:*:*"
+                    }
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:Query",
+                    "dynamodb:Scan",
+                    "dynamodb:GetItem",
+                    "dynamodb:PutItem",
+                    "dynamodb:UpdateItem",
+                    "dynamodb:DeleteItem",
+                    "dynamodb:DescribeTable"
+                  ],
+                  "Resource": "arn:aws:dynamodb:us-east-1:*:*"
+                }
+              ]
+            }
+          }
+        ],
+        "Path": "/",
+        "RoleName": {
+          "Fn::Join": [
+            "-",
+            [
+              "wetodos",
+              "dev",
+              {
+                "Ref": "AWS::Region"
+              },
+              "lambdaRole"
+            ]
+          ]
+        }
+      }
+    },
+    "EnterpriseLogAccessIamRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::802587217904:root"
+              },
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "StringEquals": {
+                  "sts:ExternalId": "ServerlessEnterprise-NR8Ym3Wpg5zHwyHxPz"
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "LogFilterAccess",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:FilterLogEvents"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::GetAtt": [
+                        "PublicDashgraphqlDashhandlerLogGroup",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "AuthDashgraphqlDashhandlerLogGroup",
+                        "Arn"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "PublicDashgraphqlDashhandlerLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/wetodos/dev/1572525535421-2019-10-31T12:38:55.421Z/wetodos.zip"
+        },
+        "FunctionName": "wetodos-dev-public-graphql-handler",
+        "Handler": "s_public_graphql_handler.handler",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs10.x",
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "NODE_ENV": "dev",
+            "DYNAMODB_TABLE": "wetodos-dev",
+            "WX_APPID": "wx191e49fa78da996f",
+            "WX_SECRET": "15c91641d2483d95de4a5eb92bba365a",
+            "JWT_PRIVATE_KEY": "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBMmhvb0NEUStjNVJidXU3a2NxdEoreUpJME5qb25kbDBYMDdNV0V3NGh2TkhBb2RUCmRGd1dpakFsN3lyZ2thZG5wLzN6VEFjd0hZaWNoLzF5NG5ENXIwYkQydy8veHBjYXJVZUJnQXNmamZPZkpWcUYKaGQ4ZlZiTVN3eUV0MTJGOElLdWtoRC80UFRwZkpiNU9icXY5b1Ira1RvdURPODVoVmVpRHlSUWZnVHVXM1A0UQp1eHdpOXBHRjdTVU03RnZFcHF1UzNDOWQ0YVNWZ1lyNXJhSXRVS2ZUQ3V0Y21jZEFVVW5TSW80R2tNQ2paaDM1CjViNTd5ZTVVVzc3aDdubldzdnFXUzZvbzBRYlBzdTduRitZQW9NSERRWGRWNFlURXlxQmNQcUdWUmNZZm1DK0EKOWxHbkNlVGtBUnNZWGhmUUd0dzVxakhvUUlOWmRCN0ZCZUEzcndJREFRQUJBb0lCQUZpanByOW0xRGJQQmRUYwpRRFltVFVQbWRDZUU4RTB1MG0vbHE0RDdRVUgvWDAyMHlBTVRaZ20xZGNWVTdMM2xobWdzK3BOY25INTBSZ0d5CnpOMGd3eWtzSG05S2VrNHduU1B0V3NFNlJCSENBRjBEQkI4YlJqWGpPRzNiYnpFSXFwVHdqVVUrWmxvai9nVnQKNlp4ckJBSld4TVV6U0J1blRjSEhaTC8xRUxUSlRaQzRkN0h4QWNQTUY5QUQ1ZlY2WlFVYjdBb2pKODJuc09aRwo3ZGR4OE1JaVdPSnhPbkFuN3piVFNJeXZrK2RNVjlFZEhLU0c3Q25OVWw3RDgwVVB5RUkxSytlSUxwTS9LaFpSCnpDWUQ2UUxoMTZva3FnWWlZV3FxQVQ1aTdoMGdFK3FHR2VMUTZKUjJRSVBDOVlkMFMzUURjUVM1S2U1N296aTEKVXFJdzhCRUNnWUVBL0tSdldBV0pycm85bGZtSTJBQWdOQjhBVGtMNkVxeUloa2lvWmJVaXEwL0R1aVVXckNwQwpTWXlpbE1QcEdZbVdEVjJvNWVYTUJQSTVzSk80dHlPNElPK201MHhKMGhpNWFLTys2VGVMaldaM2RMRGhqSVRMCjdLbmQyYXplWXRQc3Jid3ptS2VLbXEweXBFbmNndzg1b0JVeTdWbjhNRFdTam1UUWRsQXJZc2tDZ1lFQTNRQTAKbWRWZWwvdDltMFlsYTJXTFp0d1JRTlNKbllNR1N6eDJVRnhFUXRpZVFEMUR4M0VRTVBvcU00U3ZXN1JoZ1N3QQpRMnFYQmpNUktzMDRoV0VsWGlCUUxLR1dXcGJXZ1pVSmdNdVZIakFhZzRFc3d0UVFKaWNxcEJjWmx0aFREcjJhCko4cTZjYVREcDhkSUIwa3QvZmFCVUhhLzlwUDNEWll2N3A2YXlyY0NnWUVBOGFyUm4xOWN2cmtFWkV2WWJOWmgKOTdtWDcwVCtOWks0M2NydTJxdVVTRTc2cVRzRkh4Y2xaWG1Ubzc1clliUk14dWhLd2U4NVk1blpPV0YxRmlxaQozVTZoVnl1UWlkcUFzT25CbXhFNCtyK0RrU29KOXdLb2x2QStlUlIxZmcrK25Nb2tpT2ZyRzk2RlRNWWltM09hCjZkaWRhSkhsUExCaVNyZUErVXZpMUpFQ2dZQXQvRzMxbUsxL1NJaUJkOTR2YzhqSEZZSE5rS3cyQjE2VzV6VGoKVWQrdVhTN0l4VGJHV0dON0hZTU1oMDZKOFlYY2dCQnA5dE1JS2pZblJ0NjgrbEx4UEI0U3Uyankzckl4OHBZdwpvNndheFAydllZQ3o1YmFhaWNuWXJTblk5cGlKMTdBdEdZVWtRcG1uM3RMQkdWd2xuVmFaTEt5VEhZVHA0ZGVGCmVxRlJEd0tCZ0V3R2xEUkNEaEx5dVU0MWZIU0FWbXdZa2QycmptNENoMFZlckh0OVFiQ3p4dkRxblQ0Rm11ZGoKZ0xRVEQrcXdtaENIamRyZ0xsWDFnYXdLTkZpN3g5eER5L2pSMm5vcXJUUHZvOVk4cjZTajRuVVNSU3oyNVJFSwpoWDhhTkZhVzBFdzl5ajNKdk5oeUxEbU5iaXRiYlJ1MEc2R2N2amhiUFRyM2RLVDQxQVRuCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t",
+            "JWT_PUBLIC_KEY": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJDZ0tDQVFFQTJob29DRFErYzVSYnV1N2tjcXRKK3lKSTBOam9uZGwwWDA3TVdFdzRodk5IQW9kVGRGd1cKaWpBbDd5cmdrYWRucC8zelRBY3dIWWljaC8xeTRuRDVyMGJEMncvL3hwY2FyVWVCZ0FzZmpmT2ZKVnFGaGQ4ZgpWYk1Td3lFdDEyRjhJS3VraEQvNFBUcGZKYjVPYnF2OW9SK2tUb3VETzg1aFZlaUR5UlFmZ1R1VzNQNFF1eHdpCjlwR0Y3U1VNN0Z2RXBxdVMzQzlkNGFTVmdZcjVyYUl0VUtmVEN1dGNtY2RBVVVuU0lvNEdrTUNqWmgzNTViNTcKeWU1VVc3N2g3bm5Xc3ZxV1M2b28wUWJQc3U3bkYrWUFvTUhEUVhkVjRZVEV5cUJjUHFHVlJjWWZtQytBOWxHbgpDZVRrQVJzWVhoZlFHdHc1cWpIb1FJTlpkQjdGQmVBM3J3SURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0="
+          }
+        }
+      },
+      "DependsOn": [
+        "PublicDashgraphqlDashhandlerLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "PublicDashgraphqlDashhandlerLambdaVersionBIWVA6xZQ0TfE0NslSU5J4uQAH5B5GkNcpZr28so": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "PublicDashgraphqlDashhandlerLambdaFunction"
+        },
+        "CodeSha256": "g2c3LPQEOZxsCyumvvD7LHL2lxfyby55oYwf/3lVArs="
+      }
+    },
+    "AuthDashgraphqlDashhandlerLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/wetodos/dev/1572525535421-2019-10-31T12:38:55.421Z/wetodos.zip"
+        },
+        "FunctionName": "wetodos-dev-auth-graphql-handler",
+        "Handler": "s_auth_graphql_handler.handler",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs10.x",
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "NODE_ENV": "dev",
+            "DYNAMODB_TABLE": "wetodos-dev",
+            "WX_APPID": "wx191e49fa78da996f",
+            "WX_SECRET": "15c91641d2483d95de4a5eb92bba365a",
+            "JWT_PRIVATE_KEY": "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBMmhvb0NEUStjNVJidXU3a2NxdEoreUpJME5qb25kbDBYMDdNV0V3NGh2TkhBb2RUCmRGd1dpakFsN3lyZ2thZG5wLzN6VEFjd0hZaWNoLzF5NG5ENXIwYkQydy8veHBjYXJVZUJnQXNmamZPZkpWcUYKaGQ4ZlZiTVN3eUV0MTJGOElLdWtoRC80UFRwZkpiNU9icXY5b1Ira1RvdURPODVoVmVpRHlSUWZnVHVXM1A0UQp1eHdpOXBHRjdTVU03RnZFcHF1UzNDOWQ0YVNWZ1lyNXJhSXRVS2ZUQ3V0Y21jZEFVVW5TSW80R2tNQ2paaDM1CjViNTd5ZTVVVzc3aDdubldzdnFXUzZvbzBRYlBzdTduRitZQW9NSERRWGRWNFlURXlxQmNQcUdWUmNZZm1DK0EKOWxHbkNlVGtBUnNZWGhmUUd0dzVxakhvUUlOWmRCN0ZCZUEzcndJREFRQUJBb0lCQUZpanByOW0xRGJQQmRUYwpRRFltVFVQbWRDZUU4RTB1MG0vbHE0RDdRVUgvWDAyMHlBTVRaZ20xZGNWVTdMM2xobWdzK3BOY25INTBSZ0d5CnpOMGd3eWtzSG05S2VrNHduU1B0V3NFNlJCSENBRjBEQkI4YlJqWGpPRzNiYnpFSXFwVHdqVVUrWmxvai9nVnQKNlp4ckJBSld4TVV6U0J1blRjSEhaTC8xRUxUSlRaQzRkN0h4QWNQTUY5QUQ1ZlY2WlFVYjdBb2pKODJuc09aRwo3ZGR4OE1JaVdPSnhPbkFuN3piVFNJeXZrK2RNVjlFZEhLU0c3Q25OVWw3RDgwVVB5RUkxSytlSUxwTS9LaFpSCnpDWUQ2UUxoMTZva3FnWWlZV3FxQVQ1aTdoMGdFK3FHR2VMUTZKUjJRSVBDOVlkMFMzUURjUVM1S2U1N296aTEKVXFJdzhCRUNnWUVBL0tSdldBV0pycm85bGZtSTJBQWdOQjhBVGtMNkVxeUloa2lvWmJVaXEwL0R1aVVXckNwQwpTWXlpbE1QcEdZbVdEVjJvNWVYTUJQSTVzSk80dHlPNElPK201MHhKMGhpNWFLTys2VGVMaldaM2RMRGhqSVRMCjdLbmQyYXplWXRQc3Jid3ptS2VLbXEweXBFbmNndzg1b0JVeTdWbjhNRFdTam1UUWRsQXJZc2tDZ1lFQTNRQTAKbWRWZWwvdDltMFlsYTJXTFp0d1JRTlNKbllNR1N6eDJVRnhFUXRpZVFEMUR4M0VRTVBvcU00U3ZXN1JoZ1N3QQpRMnFYQmpNUktzMDRoV0VsWGlCUUxLR1dXcGJXZ1pVSmdNdVZIakFhZzRFc3d0UVFKaWNxcEJjWmx0aFREcjJhCko4cTZjYVREcDhkSUIwa3QvZmFCVUhhLzlwUDNEWll2N3A2YXlyY0NnWUVBOGFyUm4xOWN2cmtFWkV2WWJOWmgKOTdtWDcwVCtOWks0M2NydTJxdVVTRTc2cVRzRkh4Y2xaWG1Ubzc1clliUk14dWhLd2U4NVk1blpPV0YxRmlxaQozVTZoVnl1UWlkcUFzT25CbXhFNCtyK0RrU29KOXdLb2x2QStlUlIxZmcrK25Nb2tpT2ZyRzk2RlRNWWltM09hCjZkaWRhSkhsUExCaVNyZUErVXZpMUpFQ2dZQXQvRzMxbUsxL1NJaUJkOTR2YzhqSEZZSE5rS3cyQjE2VzV6VGoKVWQrdVhTN0l4VGJHV0dON0hZTU1oMDZKOFlYY2dCQnA5dE1JS2pZblJ0NjgrbEx4UEI0U3Uyankzckl4OHBZdwpvNndheFAydllZQ3o1YmFhaWNuWXJTblk5cGlKMTdBdEdZVWtRcG1uM3RMQkdWd2xuVmFaTEt5VEhZVHA0ZGVGCmVxRlJEd0tCZ0V3R2xEUkNEaEx5dVU0MWZIU0FWbXdZa2QycmptNENoMFZlckh0OVFiQ3p4dkRxblQ0Rm11ZGoKZ0xRVEQrcXdtaENIamRyZ0xsWDFnYXdLTkZpN3g5eER5L2pSMm5vcXJUUHZvOVk4cjZTajRuVVNSU3oyNVJFSwpoWDhhTkZhVzBFdzl5ajNKdk5oeUxEbU5iaXRiYlJ1MEc2R2N2amhiUFRyM2RLVDQxQVRuCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t",
+            "JWT_PUBLIC_KEY": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJDZ0tDQVFFQTJob29DRFErYzVSYnV1N2tjcXRKK3lKSTBOam9uZGwwWDA3TVdFdzRodk5IQW9kVGRGd1cKaWpBbDd5cmdrYWRucC8zelRBY3dIWWljaC8xeTRuRDVyMGJEMncvL3hwY2FyVWVCZ0FzZmpmT2ZKVnFGaGQ4ZgpWYk1Td3lFdDEyRjhJS3VraEQvNFBUcGZKYjVPYnF2OW9SK2tUb3VETzg1aFZlaUR5UlFmZ1R1VzNQNFF1eHdpCjlwR0Y3U1VNN0Z2RXBxdVMzQzlkNGFTVmdZcjVyYUl0VUtmVEN1dGNtY2RBVVVuU0lvNEdrTUNqWmgzNTViNTcKeWU1VVc3N2g3bm5Xc3ZxV1M2b28wUWJQc3U3bkYrWUFvTUhEUVhkVjRZVEV5cUJjUHFHVlJjWWZtQytBOWxHbgpDZVRrQVJzWVhoZlFHdHc1cWpIb1FJTlpkQjdGQmVBM3J3SURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0="
+          }
+        }
+      },
+      "DependsOn": [
+        "AuthDashgraphqlDashhandlerLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "AuthDashgraphqlDashhandlerLambdaVersionnLEeIk6RxP24IsmUAsFALrHNUgfz4kPVAExjE64q6s": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "AuthDashgraphqlDashhandlerLambdaFunction"
+        },
+        "CodeSha256": "g2c3LPQEOZxsCyumvvD7LHL2lxfyby55oYwf/3lVArs="
+      }
+    },
+    "ApiGatewayRestApi": {
+      "Type": "AWS::ApiGateway::RestApi",
+      "Properties": {
+        "Name": "dev-wetodos",
+        "EndpointConfiguration": {
+          "Types": [
+            "EDGE"
+          ]
+        }
+      }
+    },
+    "ApiGatewayResourcePublic": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "public",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceAuth": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "auth",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodPublicOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,POST'",
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourcePublic"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodAuthOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,POST'",
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceAuth"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodPublicPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourcePublic"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "PublicDashgraphqlDashhandlerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayMethodPublicGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourcePublic"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "PublicDashgraphqlDashhandlerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayMethodAuthPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceAuth"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "AuthDashgraphqlDashhandlerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayMethodAuthGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceAuth"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "AuthDashgraphqlDashhandlerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayDeployment1572525495116": {
+      "Type": "AWS::ApiGateway::Deployment",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "StageName": "dev"
+      },
+      "DependsOn": [
+        "ApiGatewayMethodPublicOptions",
+        "ApiGatewayMethodAuthOptions",
+        "ApiGatewayMethodPublicPost",
+        "ApiGatewayMethodPublicGet",
+        "ApiGatewayMethodAuthPost",
+        "ApiGatewayMethodAuthGet"
+      ]
+    },
+    "PublicDashgraphqlDashhandlerLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "PublicDashgraphqlDashhandlerLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "AuthDashgraphqlDashhandlerLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "AuthDashgraphqlDashhandlerLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "ApiGatewayLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/api-gateway/wetodos-dev"
+      }
+    },
+    "CustomApiGatewayAccountCloudWatchRole": {
+      "Type": "Custom::ApiGatewayAccountRole",
+      "Version": 1,
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomDashresourceDashapigwDashcwDashroleLambdaFunction",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "IamRoleCustomResourcesLambdaExecution": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": {
+              "Fn::Join": [
+                "-",
+                [
+                  "dev",
+                  "wetodos",
+                  "custom-resources-lambda"
+                ]
+              ]
+            },
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::Join": [
+                      ":",
+                      [
+                        "arn:aws:iam:",
+                        {
+                          "Ref": "AWS::AccountId"
+                        },
+                        "role/*"
+                      ]
+                    ]
+                  },
+                  "Action": [
+                    "iam:AttachRolePolicy",
+                    "iam:CreateRole",
+                    "iam:ListAttachedRolePolicies",
+                    "iam:PassRole"
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Resource": "arn:aws:apigateway:*::/account",
+                  "Action": [
+                    "apigateway:GET",
+                    "apigateway:PATCH"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "CustomDashresourceDashapigwDashcwDashroleLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/wetodos/dev/1572525535421-2019-10-31T12:38:55.421Z/custom-resources.zip"
+        },
+        "FunctionName": "wetodos-dev-custom-resource-apigw-cw-role",
+        "Handler": "apiGatewayCloudWatchRole/handler.handler",
+        "MemorySize": 1024,
+        "Runtime": "nodejs10.x",
+        "Timeout": 180,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleCustomResourcesLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "IamRoleCustomResourcesLambdaExecution"
+      ]
+    },
+    "UserDynamoDbTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "id",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "wxOpenId",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "name",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "email",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "phone",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ],
+        "GlobalSecondaryIndexes": [
+          {
+            "IndexName": "index_name",
+            "KeySchema": [
+              {
+                "AttributeName": "name",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          },
+          {
+            "IndexName": "index_wxOpenId",
+            "KeySchema": [
+              {
+                "AttributeName": "wxOpenId",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          },
+          {
+            "IndexName": "index_email",
+            "KeySchema": [
+              {
+                "AttributeName": "email",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          },
+          {
+            "IndexName": "index_phone",
+            "KeySchema": [
+              {
+                "AttributeName": "phone",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          }
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "TableName": "User_dev"
+      }
+    },
+    "ListDynamoDbTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "BillingMode": "PAY_PER_REQUEST",
+        "TableName": "List_dev",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "id",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "name",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "uid",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ],
+        "GlobalSecondaryIndexes": [
+          {
+            "IndexName": "index_name",
+            "KeySchema": [
+              {
+                "AttributeName": "name",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          },
+          {
+            "IndexName": "index_uid",
+            "KeySchema": [
+              {
+                "AttributeName": "uid",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          }
+        ]
+      }
+    },
+    "TaskDynamoDbTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "BillingMode": "PAY_PER_REQUEST",
+        "TableName": "Task_dev",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "id",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "lid",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "uid",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ],
+        "GlobalSecondaryIndexes": [
+          {
+            "IndexName": "index_lid",
+            "KeySchema": [
+              {
+                "AttributeName": "lid",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          },
+          {
+            "IndexName": "index_uid",
+            "KeySchema": [
+              {
+                "AttributeName": "uid",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          }
+        ]
+      }
+    },
+    "CloudWatchLogsSubscriptionFilterPublicDashgraphqlDashhandlerLogGroup": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:NR8Ym3Wpg5zHwyHxPz#ZHgz0nDkc03QrkGHb1#wetodos#dev",
+        "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+        "LogGroupName": {
+          "Ref": "PublicDashgraphqlDashhandlerLogGroup"
+        }
+      }
+    },
+    "CloudWatchLogsSubscriptionFilterAuthDashgraphqlDashhandlerLogGroup": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:NR8Ym3Wpg5zHwyHxPz#ZHgz0nDkc03QrkGHb1#wetodos#dev",
+        "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+        "LogGroupName": {
+          "Ref": "AuthDashgraphqlDashhandlerLogGroup"
+        }
+      }
+    },
+    "CloudWatchLogsSubscriptionFilterApiGatewayLogGroup": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:NR8Ym3Wpg5zHwyHxPz#ZHgz0nDkc03QrkGHb1#wetodos#dev",
+        "FilterPattern": "\"SLS_ACCESS_LOG\"",
+        "LogGroupName": {
+          "Ref": "ApiGatewayLogGroup"
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "ServerlessDeploymentBucketName": {
+      "Value": {
+        "Ref": "ServerlessDeploymentBucket"
+      }
+    },
+    "EnterpriseLogAccessIamRole": {
+      "Value": {
+        "Fn::GetAtt": [
+          "EnterpriseLogAccessIamRole",
+          "Arn"
+        ]
+      }
+    },
+    "PublicDashgraphqlDashhandlerLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "PublicDashgraphqlDashhandlerLambdaVersionBIWVA6xZQ0TfE0NslSU5J4uQAH5B5GkNcpZr28so"
+      }
+    },
+    "AuthDashgraphqlDashhandlerLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "AuthDashgraphqlDashhandlerLambdaVersionnLEeIk6RxP24IsmUAsFALrHNUgfz4kPVAExjE64q6s"
+      }
+    },
+    "ServiceEndpoint": {
+      "Description": "URL of the service endpoint",
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "ApiGatewayRestApi"
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region"
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix"
+            },
+            "/dev"
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2077b785-3b72-49cd-b908-185368ace754" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>logger.info</find>
+      <find>uid</find>
+      <find>UserProfileInput</find>
+      <find>anxing123</find>
+      <find>openI</find>
+      <find>login</find>
+      <find>ownerless</find>
+      <find>get</find>
+      <find>ownerlessTasks</find>
+      <find>defaultUserProfile</find>
+      <find>update</find>
+      <find>generateExpression</find>
+      <find>createTas</find>
+      <find>createTask</find>
+      <find>anxing</find>
+      <find>Authentication</find>
+      <find>Missing Authentication Token</find>
+      <find>demo</find>
+      <find>dynamodb</find>
+      <find>todo</find>
+      <find>Todo</find>
+      <find>ExpressionAttributeValues</find>
+      <find>DYNAMODB_TABLE</find>
+      <find>graphql-type-json</find>
+      <find>region</find>
+      <find>demo1</find>
+      <find>buffer</find>
+      <find>Buffer</find>
+      <find>infos -----</find>
+      <find>MIIEowIBAAKCAQEA2hooCDQ</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>const</replace>
+      <replace />
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/src/graphql/public</dir>
+      <dir>$PROJECT_DIR$/test</dir>
+      <dir>$PROJECT_DIR$/src/graphql</dir>
+      <dir>$PROJECT_DIR$/node_modules</dir>
+      <dir>$PROJECT_DIR$/src</dir>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/handler.js" />
+        <option value="$PROJECT_DIR$/offline/migrations/user.json" />
+        <option value="$PROJECT_DIR$/offline/user.json" />
+        <option value="$PROJECT_DIR$/dynamodb.js" />
+        <option value="$PROJECT_DIR$/test/integration/user.js" />
+        <option value="$PROJECT_DIR$/graphql-handler.js" />
+        <option value="$PROJECT_DIR$/test/integration/user.test.js" />
+        <option value="$PROJECT_DIR$/src/schema.js" />
+        <option value="$PROJECT_DIR$/test/integration/todo.test.js" />
+        <option value="$PROJECT_DIR$/src/resolvers.js" />
+        <option value="$PROJECT_DIR$/test.js" />
+        <option value="$PROJECT_DIR$/src/graphql-handler.js" />
+        <option value="$PROJECT_DIR$/test/apollo-client.js" />
+        <option value="$PROJECT_DIR$/test/ax-jest.js" />
+        <option value="$PROJECT_DIR$/test/temp.js" />
+        <option value="$PROJECT_DIR$/test/globalTeardown.js" />
+        <option value="$PROJECT_DIR$/test/setupTests.js" />
+        <option value="$PROJECT_DIR$/test/demo.test.js" />
+        <option value="$PROJECT_DIR$/test/globalSetup.js" />
+        <option value="$PROJECT_DIR$/test/setup.js" />
+        <option value="$PROJECT_DIR$/test/integration/auth/common.test.js" />
+        <option value="$PROJECT_DIR$/test/integration/auth/todo.test.js" />
+        <option value="$PROJECT_DIR$/src/graphql/public/wxUtil.js" />
+        <option value="$PROJECT_DIR$/test/config.js" />
+        <option value="$PROJECT_DIR$/test/wechat.server.mocker.js" />
+        <option value="$PROJECT_DIR$/test/integration/public/user.test.js" />
+        <option value="$PROJECT_DIR$/src/dynamodb.js" />
+        <option value="$PROJECT_DIR$/node_modules/apollo-server-core/src/ApolloServer.ts" />
+        <option value="$PROJECT_DIR$/logs" />
+        <option value="$PROJECT_DIR$/src/logger.js" />
+        <option value="$PROJECT_DIR$/src/graphql/auth/handler.js" />
+        <option value="$PROJECT_DIR$/node_modules/graphql/language/parser.js" />
+        <option value="$PROJECT_DIR$/config/errCodes.js" />
+        <option value="$PROJECT_DIR$/config/appCfg.js" />
+        <option value="$PROJECT_DIR$/src/graphql/public/handler.js" />
+        <option value="$PROJECT_DIR$/src/graphql/public/schema.js" />
+        <option value="$PROJECT_DIR$/src/graphql/auth/resolvers.js" />
+        <option value="$PROJECT_DIR$/src/graphql/auth/schema.js" />
+        <option value="$PROJECT_DIR$/config/dynamodb.js" />
+        <option value="$PROJECT_DIR$/test/common.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/config/wechat.js" />
+        <option value="$PROJECT_DIR$/Readme.md" />
+        <option value="$PROJECT_DIR$/src/utils.js" />
+        <option value="$PROJECT_DIR$/serverless.yaml" />
+        <option value="$PROJECT_DIR$/src/graphql/public/resolvers.js" />
+        <option value="$PROJECT_DIR$/ssh/id_rsa" />
+        <option value="$PROJECT_DIR$/pem/id_rsa" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/serverless.prod.yaml" />
+        <option value="$PROJECT_DIR$/serverless.dev.yaml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="width" value="714" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="WxProject" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="serverless" type="b2602c69:ProjectViewProjectNode" />
+              <item name="serverless" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
+    <property name="nodejs.mocha.mocha_node_package_dir" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/tmp" />
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/test/integration/auth" />
+      <recent name="$PROJECT_DIR$/test/integration/public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/test/integration/public" />
+      <recent name="$PROJECT_DIR$/test/integration/auth" />
+      <recent name="$PROJECT_DIR$/test/temp" />
+      <recent name="$PROJECT_DIR$/src/temp" />
+    </key>
+  </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:3000" />
+          <option name="urlPath" value="/graphql" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="mutation {   login(name: &quot;anxing&quot;, password: &quot;anxing&quot;) {       id       name       password   } }" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:3000" />
+          <option name="urlPath" value="/graphql" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Jest.User.wxLogin.work">
+    <configuration name="User.wxLogin.work" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <jest-options value="--forceExit" />
+      <envs>
+        <env name="SLS_DEBUG" value="*" />
+      </envs>
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/integration/public/user.test.js" />
+      <test-names>
+        <test-name value="User" />
+        <test-name value="wxLogin" />
+        <test-name value="work" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <working-dir value="" />
+      <jest-options value="--forceExit" />
+      <envs>
+        <env name="SLS_DEBUG" value="*" />
+      </envs>
+      <scope-kind value="ALL" />
+      <method v="2" />
+    </configuration>
+    <configuration name="serverless" type="NodeJSConfigurationType" application-parameters="offline start --skipCacheInvalidation" nameIsGenerated="true" path-to-js-file="$USER_HOME$/.nvm/versions/node/v10.16.0/bin/serverless" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Jest.User.wxLogin.work" />
+      <item itemvalue="Node.js.serverless" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.User.wxLogin.work" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2077b785-3b72-49cd-b908-185368ace754" name="Default Changelist" comment="" />
+      <created>1569231842744</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1569231842744</updated>
+      <workItem from="1569231844209" duration="43677000" />
+      <workItem from="1569396393565" duration="53629000" />
+      <workItem from="1569544129053" duration="7972000" />
+      <workItem from="1569578132863" duration="1112000" />
+      <workItem from="1569828108953" duration="88000" />
+      <workItem from="1569828524403" duration="1273000" />
+      <workItem from="1570802221897" duration="4342000" />
+      <workItem from="1571045988206" duration="14607000" />
+      <workItem from="1571275303931" duration="56938000" />
+      <workItem from="1572268192371" duration="5765000" />
+      <workItem from="1572305105856" duration="22425000" />
+      <workItem from="1572437169495" duration="4663000" />
+      <workItem from="1572452099494" duration="323000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="User_wxLogin_work - 2019.10.17 at 10h 00m 34s.xml">
+      <configuration name="User.wxLogin.work" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="User_wxLogin_work - 2019.10.17 at 10h 01m 08s.xml">
+      <configuration name="User.wxLogin.work" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="User_wxLogin_work - 2019.10.17 at 10h 02m 55s.xml">
+      <configuration name="User.wxLogin.work" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="User_wxLogin_work - 2019.10.17 at 10h 06m 46s.xml">
+      <configuration name="User.wxLogin.work" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="User_wxLogin_work - 2019.10.17 at 10h 10m 29s.xml">
+      <configuration name="User.wxLogin.work" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="User_wxLogin_work - 2019.10.17 at 10h 11m 06s.xml">
+      <configuration name="User.wxLogin.work" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="User_wxLogin_work - 2019.10.17 at 10h 11m 17s.xml">
+      <configuration name="User.wxLogin.work" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="User_wxLogin_work - 2019.10.17 at 10h 12m 24s.xml">
+      <configuration name="User.wxLogin.work" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="User_wxLogin_work - 2019.10.17 at 10h 14m 40s.xml">
+      <configuration name="User.wxLogin.work" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="User_wxLogin_work - 2019.10.17 at 10h 24m 14s.xml">
+      <configuration name="User.wxLogin.work" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="216814000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.52219874" visible="true" weight="0.2932761" />
+      <window_info id="Structure" order="1" sideWeight="0.47780126" side_tool="true" weight="0.28540772" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="npm" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32891566" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32891566" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" content_ui="combo" id="GraphQL" order="9" weight="0.32891566" />
+      <window_info anchor="bottom" id="TypeScript" order="10" weight="0.32891566" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.56987953" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="REST Client" order="13" weight="0.3759036" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="PlantUML" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/utils.js</url>
+          <line>20</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="NONE" type="javascript">
+          <url>file://$PROJECT_DIR$/src/dynamodb.js</url>
+          <line>1</line>
+          <log-expression expression="&#10;// connect to local DB if running offline&#10;if (process.env.IS_OFFLINE) {&#10;    options = {&#10;        region: 'localhost',&#10;        endpoint: 'http://localhost:8000',&#10;        accessKeyId: 'DEFAULT_ACCESS_KEY',  // needed if you don't have aws credentials at all in env&#10;        secretAccessKey: 'DEFAULT_SECRET' // needed if you don't have aws credentials at all in env&#10;    };&#10;}&#10;&#10;const client = new AWS.DynamoDB.DocumentClient(options);&#10;" language="JavaScript" />
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/integration/auth/todo.test.js</url>
+          <line>102</line>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/graphql/auth/resolvers.js</url>
+          <line>122</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointLogExpression">
+      <expression>
+        <expression-string>// connect to local DB if running offline
+if (process.env.IS_OFFLINE) {
+    options = {
+        region: 'localhost',
+        endpoint: 'http://localhost:8000',
+        accessKeyId: 'DEFAULT_ACCESS_KEY',  // needed if you don't have aws credentials at all in env
+        secretAccessKey: 'DEFAULT_SECRET' // needed if you don't have aws credentials at all in env
+    };
+}
+
+const client = new AWS.DynamoDB.DocumentClient(options);</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/node_modules/apollo-server-core/src/utils/isDirectiveDefined.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/apollo-server-core/src/ApolloServer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="387" selection-start-line="387" selection-end-line="387" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/graphql-tools/dist/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/graphql-tools/dist/makeExecutableSchema.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/graphql/type/validate.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/graphql/type/schema.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3228">
+          <caret line="230" column="12" lean-forward="true" selection-start-line="230" selection-start-column="12" selection-end-line="230" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/graphql-type-json/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="74" column="21" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/apollo-server-core/dist/types.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="49" column="27" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/apollo-server-lambda/dist/ApolloServer.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/graphql/language/parser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="108" selection-start-line="108" selection-end-line="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/apollo-server-errors/dist/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="29" column="40" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.dynamodb/LICENSE.txt" />
+    <entry file="file://$PROJECT_DIR$/tmp/shared-local-instance.db-bk" />
+    <entry file="file://$PROJECT_DIR$/src/graphql/auth/handler.js" />
+    <entry file="file://$PROJECT_DIR$/src/graphql/public/wxUtil.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/aws-sdk/lib/dynamodb/document_client.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-112">
+          <caret line="2262" column="19" selection-start-line="2262" selection-start-column="19" selection-end-line="2262" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.nvm/versions/node/v10.16.0/lib/node_modules/serverless/lib/plugins/aws/provider/awsProvider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3093">
+          <caret line="316" column="26" selection-start-line="316" selection-start-column="26" selection-end-line="316" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serverless_sdk/index.js" />
+    <entry file="file://$PROJECT_DIR$/src/logger.js" />
+    <entry file="file://$PROJECT_DIR$/src/graphql/auth/resolvers.js" />
+    <entry file="file://$PROJECT_DIR$/test/integration/auth/common.test.js" />
+    <entry file="file://$PROJECT_DIR$/src/graphql/public/schema.js" />
+    <entry file="file://$PROJECT_DIR$/tmp/shared-local-instance.db">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-219">
+          <caret line="21" column="216" selection-start-line="21" selection-start-column="216" selection-end-line="21" selection-end-column="216" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/graphql/public/handler.js" />
+    <entry file="file://$PROJECT_DIR$/src/handler.js" />
+    <entry file="file://$PROJECT_DIR$/.serverless/cloudformation-template-update-stack.json" />
+    <entry file="file://$PROJECT_DIR$/.serverless/serverless-state.json" />
+    <entry file="file://$PROJECT_DIR$/.gitignore" />
+    <entry file="file://$PROJECT_DIR$/Dockerfile" />
+    <entry file="file://$PROJECT_DIR$/config/appCfg.js" />
+    <entry file="file://$PROJECT_DIR$/src/dynamodb.js" />
+    <entry file="file://$PROJECT_DIR$/config/errCodes.js" />
+    <entry file="file://$PROJECT_DIR$/config/dynamodb.js" />
+    <entry file="file://$PROJECT_DIR$/logs" />
+    <entry file="file://$PROJECT_DIR$/.serverless/cloudformation-template-create-stack.json" />
+    <entry file="file://$PROJECT_DIR$/src/graphql/public/resolvers.js" />
+    <entry file="file://$PROJECT_DIR$/src/utils.js" />
+    <entry file="file://$PROJECT_DIR$/package-lock.json" />
+    <entry file="file://$PROJECT_DIR$/config/wechat.js" />
+    <entry file="file://$PROJECT_DIR$/ssh/id_rsa" />
+    <entry file="file://$PROJECT_DIR$/ssh/id_rsa.pub" />
+    <entry file="file://$PROJECT_DIR$/pem/id_rsa" />
+    <entry file="file://$PROJECT_DIR$/pem/public.pem" />
+    <entry file="file://$PROJECT_DIR$/ssh/public.pem" />
+    <entry file="file://$PROJECT_DIR$/src/graphql/auth/schema.js" />
+    <entry file="file://$PROJECT_DIR$/serverless.yaml" />
+    <entry file="file://$PROJECT_DIR$/package.json" />
+    <entry file="file://$PROJECT_DIR$/.vscode/launch.json" />
+    <entry file="file://$PROJECT_DIR$/serverless.dev.yaml" />
+    <entry file="file://$PROJECT_DIR$/serverless.prod.yaml" />
+    <entry file="file://$PROJECT_DIR$/README.md" />
+  </component>
+</project>

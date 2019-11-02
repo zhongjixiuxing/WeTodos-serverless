@@ -1,0 +1,18 @@
+{
+  "errorMessage": "Uncaught error in your 'graphql-handler' handler",
+  "errorType": "SyntaxError",
+  "stackTrace": [
+    "SyntaxError: Unexpected token m in JSON at position 0",
+    "at JSON.parse (<anonymous>)",
+    "at graphqlHandler (/Users/anxing/workspace/anxing/serverless/demo1/node_modules/apollo-server-lambda/src/lambdaApollo.ts:47:18)",
+    "at /Users/anxing/workspace/anxing/serverless/demo1/node_modules/apollo-server-lambda/src/ApolloServer.ts:209:9",
+    "at Promise (/Users/anxing/workspace/anxing/serverless/demo1/node_modules/serverless-offline/src/ApiGateway.js:946:17)",
+    "at new Promise (<anonymous>)",
+    "at handler (/Users/anxing/workspace/anxing/serverless/demo1/node_modules/serverless-offline/src/ApiGateway.js:540:16)",
+    "at module.exports.internals.Manager.execute (/Users/anxing/workspace/anxing/serverless/demo1/node_modules/@hapi/hapi/lib/toolkit.js:41:33)",
+    "at Object.internals.handler (/Users/anxing/workspace/anxing/serverless/demo1/node_modules/@hapi/hapi/lib/handler.js:46:48)",
+    "at exports.execute (/Users/anxing/workspace/anxing/serverless/demo1/node_modules/@hapi/hapi/lib/handler.js:31:36)",
+    "at Request._lifecycle (/Users/anxing/workspace/anxing/serverless/demo1/node_modules/@hapi/hapi/lib/request.js:312:68)"
+  ],
+  "offlineInfo": "If you believe this is an issue with serverless-offline please submit it, thanks. https://github.com/dherault/serverless-offline/issues"
+}
