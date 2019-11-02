@@ -1,4 +1,6 @@
 service: wetodos
+app: wetodos
+org: anxing
 
 provider:
   runtime: nodejs10.x
