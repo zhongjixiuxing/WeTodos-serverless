@@ -6,6 +6,8 @@ require('jest');
 // kill old dynamondb service
 function killLocalDynamodbService() {
     const pid = execSync('/usr/bin/lsof -nP -iTCP:8000 |grep LISTEN|awk \'{print $2;}\'');
+
+    console.log('pid ------------- :', pid);
     if (pid.toString() !== '') {
         execSync(`kill -9 ${pid.toString()}`);
     }
