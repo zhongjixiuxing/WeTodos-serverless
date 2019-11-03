@@ -31,7 +31,7 @@ async function clearDynamondb() {
     }
 }
 
-afterEach(async (done) => {
+beforeEach(async (done) => {
     await clearDynamondb();
     done();
 });

@@ -6,6 +6,7 @@ require('jest');
 // kill old dynamondb service
 function killLocalDynamodbService() {
     const pid = execSync('lsof -nP -iTCP:8000 |grep LISTEN|awk \'{print $2;}\'');
+
     if (pid.toString() !== '') {
         execSync(`kill -9 ${pid.toString()}`);
     }
@@ -53,8 +54,12 @@ function startSlsOffline() {
         slsEnv.JWT_PUBLIC_KEY = config.JWT_PUBLIC_KEY;
         slsEnv.NODE_ENV = 'test';
 
+        // const execResult = execSync(`NODE_ENV=${slsEnv.NODE_ENV} JWT_PUBLIC_KEY=${slsEnv.JWT_PUBLIC_KEY} JWT_PRIVATE_KEY=${slsEnv.JWT_PRIVATE_KEY} sudo sls offline start --config serverless.yaml`);
+        // console.log('execResult --------------- : ', execResult);
+
         const slsOfflineProcess = spawn("sls", ["offline", "start", '--config', 'serverless.yaml'], {env: slsEnv});
 
+        console.log('slsOfflineProcess ---------------  : ', slsOfflineProcess);
         console.log(`Serverless: Offline started with PID : ${slsOfflineProcess.pid}`);
 
         slsOfflineProcess.stdout.on('data', async (data) => {
@@ -67,8 +72,8 @@ function startSlsOffline() {
         });
 
         slsOfflineProcess.stderr.on('data', (errData) => {
-            console.log(`Error starting Serverless Offline:\n${errData}`);
-            reject(errData);
+            console.error(`Error starting Serverless Offline:\n${errData.toString()}`);
+            // reject(errData);
         });
     })
 }
