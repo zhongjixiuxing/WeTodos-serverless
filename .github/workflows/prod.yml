@@ -14,6 +14,7 @@ jobs:
         with:
           args: install
       - name: testing
+        uses: actions/checkout@master
         with:
           args: run test
         env:
