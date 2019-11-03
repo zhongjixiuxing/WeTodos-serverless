@@ -15,7 +15,7 @@ jobs:
           args: install
       - name: testing
         # uses: actions/npm@master
-        run: npm i -g serverless && which sls
+        run: sudo npm i -g serverless && which sls
         # with:
         #   args: run test
         # env:
