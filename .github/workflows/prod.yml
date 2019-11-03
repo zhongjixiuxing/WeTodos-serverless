@@ -13,6 +13,8 @@ jobs:
         uses: actions/npm@master
         with:
           args: install
+      - name: install lsof
+        run: sudo npm install lsof -y
       - name: testing
         uses: actions/npm@master
         with:
