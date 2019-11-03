@@ -30,7 +30,7 @@ const GraphqlErrors = {
 
 // kill old dynamondb service
 function killLocalDynamodbService() {
-    const pid = execSync('lsof -nP -iTCP:8000 |grep LISTEN|awk \'{print $2;}\'');
+    const pid = execSync('/usr/bin/lsof -nP -iTCP:8000 |grep LISTEN|awk \'{print $2;}\'');
     if (pid.toString() !== '') {
         execSync(`kill -9 ${pid.toString()}`);
     }
