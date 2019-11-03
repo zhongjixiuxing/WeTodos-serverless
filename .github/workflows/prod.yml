@@ -8,6 +8,8 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
+      - name: install serverless
+        run: sudo npm i -g serverless
       - uses: actions/checkout@master
       - name: npm install
         uses: actions/npm@master
@@ -15,7 +17,7 @@ jobs:
           args: install
       - name: testing
         # uses: actions/npm@master
-        run: sudo npm i -g serverless && which sls
+        run: which sls
         # with:
         #   args: run test
         # env:
