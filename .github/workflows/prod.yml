@@ -8,17 +8,14 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: which lsof
-        run: which lsof
-      - name: install lsof
-        run: sudo apt-get install lsof -y
       - uses: actions/checkout@master
       - name: npm install
         uses: actions/npm@master
         with:
           args: install
       - name: testing
-        uses: actions/npm@master
+        # uses: actions/npm@master
+        run: npm
         with:
           args: run test
         # env:
