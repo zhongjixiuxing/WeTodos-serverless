@@ -28,7 +28,7 @@ provider:
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:*"
 
 package:
-  exclude: # 在打包是排除无用的文件
+  exclude: # 打包到aws时排除无用的文件
     - tmp/**
     - .dynamodb/**
     - .vscode/**
@@ -36,6 +36,9 @@ package:
     - .idea
     - .git
     - serverless.yaml
+    - serverless.yml
+    - serverless.prod.yaml
+    - package-lock.json
     - logs
     - Dockerfile
     - ssh/**
