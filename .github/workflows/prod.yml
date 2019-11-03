@@ -10,11 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: npm install
-        uses: actions/npm@10
+        uses: actions/npm@10.x
         with:
           args: install
       - name: testing
-        uses: actions/npm@10
+        uses: actions/npm@10.x
         with:
           args: run test
         # env:
