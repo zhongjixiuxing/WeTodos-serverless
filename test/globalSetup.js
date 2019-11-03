@@ -57,6 +57,7 @@ function startSlsOffline() {
 
         const slsOfflineProcess = spawn("sls", ["offline", "start", '--config', 'serverless.yaml'], {env: slsEnv});
 
+        console.log('slsOfflineProcess ----------------------------- : ', slsOfflineProcess);
         console.log(`Serverless: Offline started with PID : ${slsOfflineProcess.pid}`);
 
         slsOfflineProcess.stdout.on('data', async (data) => {
