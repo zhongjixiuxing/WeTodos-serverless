@@ -12,7 +12,11 @@ jobs:
       - name: npm install
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
-          args: npm install && mkdir -p tmp
+          args: npm install
+      - name: npm install
+        uses: docker://anxing131/wetodos-cicd-base-img
+        with:
+          args: mkdir -p tmp
       - name: install dynamodb
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
