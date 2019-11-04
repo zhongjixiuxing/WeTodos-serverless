@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: install serverless
         run: sudo npm i -g serverless
+      - name: install dynamodb
+        run: sudo sls dynamodb install
       - uses: actions/checkout@master
       - name: npm install
         uses: actions/npm@master
