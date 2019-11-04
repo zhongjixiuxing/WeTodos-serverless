@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: npm install
-        uses: anxing131/wetodos-cicd-base-img
+        uses: anxing131/wetodos-cicd-base-img@latest
         with:
           entrypoint: /bin/bash
           args: npm install
