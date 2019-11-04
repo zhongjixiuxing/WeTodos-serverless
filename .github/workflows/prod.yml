@@ -6,11 +6,14 @@ name: Deploy to prod environment
 jobs:
   deploy:
     name: deploy
-    runs-on: anxing131/wetodos-cicd-base-img
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - name: npm install
-        run: npm install
+        uses: anxing131/wetodos-cicd-base-img
+        with:
+          entrypoint: /bin/bash
+          args: npm install
 #      - name: install dynamodb
 #        run: sls dynamodb install
 #      - name: testing
