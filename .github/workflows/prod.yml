@@ -15,6 +15,8 @@ jobs:
         uses: actions/npm@master
         with:
           args: install
+      - name: echo
+        run: ls && pwd
       - name: install dynamodb
         run: sudo sls dynamodb install
       - name: testing
