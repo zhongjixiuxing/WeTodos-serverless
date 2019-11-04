@@ -20,7 +20,7 @@ jobs:
       - name: install dynamodb
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
-          args: sls dynamodb install
+          args: PWD=$(pwd) sls dynamodb install
       - name: testing
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
