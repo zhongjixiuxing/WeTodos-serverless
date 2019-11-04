@@ -18,7 +18,9 @@ jobs:
       - name: echo
         run: ls && pwd && echo $HOME && echo $GITHUB_WORKSPACE
       - name: install dynamodb
-        run: export PWD=$GITHUB_WORKSPACE && sudo sls dynamodb install
+        run: echo $PWD && sudo sls dynamodb install
+        env:
+          PWD: $GITHUB_WORKSPACE
       - name: testing
         # uses: actions/npm@master
         run: npm run test
