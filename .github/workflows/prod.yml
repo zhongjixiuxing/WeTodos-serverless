@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: npm install
-        uses: docker://anxing131/wetodos-cicd-base-img@latest
+        uses: docker://anxing131/wetodos-cicd-base-img
         with:
           entrypoint: /bin/bash
           args: npm install
