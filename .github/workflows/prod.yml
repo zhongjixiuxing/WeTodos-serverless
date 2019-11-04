@@ -8,21 +8,18 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: install serverless
-        run: sudo npm i -g serverless
       - uses: actions/checkout@master
       - name: npm install
-        uses: actions/npm@master
+        uses: anxing131/wetodos-cicd-base-img
         with:
-          args: install
-      - name: echo
-        run: ls && pwd && echo $HOME && echo $GITHUB_WORKSPACE
+          args: npm install
+
       - name: install dynamodb
-        run: echo $PWD && sudo sls dynamodb install
-#        env:
-#          PWD: $GITHUB_WORKSPACE
+        uses: anxing131/wetodos-cicd-base-img
+        with:
+          args: sls dynamodb install
       - name: testing
-        # uses: actions/npm@master
+        uses: anxing131/wetodos-cicd-base-img
         run: npm run test
         # with:
         #   args: run test
