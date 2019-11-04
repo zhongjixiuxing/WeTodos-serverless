@@ -12,8 +12,15 @@ jobs:
       - name: npm install
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
-#          entrypoint: /bin/bash
-          args: npm install
+          args: npm install && mkdir -p tmp
+      - name: install dynamodb
+        uses: docker://anxing131/wetodos-cicd-base-img
+        with:
+          args: sls dynamodb install
+      - name: install dynamodb
+        uses: docker://anxing131/wetodos-cicd-base-img
+        with:
+          args: npm run test
 #      - name: install dynamodb
 #        run: sls dynamodb install
 #      - name: testing
