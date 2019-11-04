@@ -28,7 +28,7 @@ jobs:
       - name: testing
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
-          args: npm run test
+          args: npm run start
 #      - name: install dynamodb
 #        run: sls dynamodb install
 #      - name: testing
