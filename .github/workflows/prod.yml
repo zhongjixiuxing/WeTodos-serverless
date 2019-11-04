@@ -28,7 +28,7 @@ jobs:
       - name: testing
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
-          args: npm run start
+          args: JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64  JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre CLASSPATH=.:/usr/lib/jvm/java-8-openjdk-amd64/lib:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib npm run start
 #      - name: install dynamodb
 #        run: sls dynamodb install
 #      - name: testing
