@@ -13,10 +13,14 @@ jobs:
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
           args: npm install
+      - name: cp dynamodb
+        uses: docker://anxing131/wetodos-cicd-base-img
+        with:
+          args: cp -R /WeTodos-serverless/.dynamodb .
       - name: mkdir tmp dir
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
-          args: ls /github/workspace
+          args: ll /github/workspace
       - name: install dynamodb
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
