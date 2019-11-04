@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@master
       - name: npm install
         run: npm install
-      - name: install dynamodb
-        run: sls dynamodb install
-      - name: testing
-        run: npm run test
+#      - name: install dynamodb
+#        run: sls dynamodb install
+#      - name: testing
+#        run: npm run test
