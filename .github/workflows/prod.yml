@@ -16,7 +16,7 @@ jobs:
       - name: mkdir tmp dir
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
-          args: mkdir -p tmp
+          args: ls /github/workspace
       - name: install dynamodb
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
