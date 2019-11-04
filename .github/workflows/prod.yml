@@ -16,7 +16,7 @@ jobs:
         with:
           args: install
       - name: echo
-        run: ls && pwd
+        run: ls && pwd && echo $HOME && echo $GITHUB_WORKSPACE
       - name: install dynamodb
         run: sudo sls dynamodb install
       - name: testing
