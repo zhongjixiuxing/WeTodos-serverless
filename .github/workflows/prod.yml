@@ -20,11 +20,11 @@ jobs:
       - name: mkdir tmp dir
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
-          args: ll /github/workspace
-      - name: install dynamodb
-        uses: docker://anxing131/wetodos-cicd-base-img
-        with:
-          args: PWD=/github/workspace sls dynamodb install
+          args: ls -la /github/workspace
+#      - name: install dynamodb
+#        uses: docker://anxing131/wetodos-cicd-base-img
+#        with:
+#          args: PWD=/github/workspace sls dynamodb install
       - name: testing
         uses: docker://anxing131/wetodos-cicd-base-img
         with:
