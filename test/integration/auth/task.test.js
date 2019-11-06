@@ -370,7 +370,7 @@ describe('Task', () => {
 
             checkResp(queryResp);
             tasks = queryResp.data.getTasks;
-            assert.deepStrictEqual(tasks.count, 4);
+            assert.deepStrictEqual(tasks.count, 3);
             assert.deepStrictEqual(tasks.limit, 5);
             assert.deepStrictEqual(tasks.offset, 2);
             assert.deepStrictEqual(tasks.tasks.length, 3);
