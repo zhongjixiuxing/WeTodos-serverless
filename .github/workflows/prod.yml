@@ -10,26 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: npm install
+      - name: setup environment
         run: |
           curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
           sudo apt install -y nodejs
-          node -v
-          npm -version
           sudo npm i -g serverless
           sudo npm i
-          echo $PWD
           export PWD=$(pwd)
-          echo $PWD
-          java -version
           sudo sls dynamodb install
-          mkdir tmp
-          ls -la
-          sudo npm run test
-      - name: npm version
+      - name: testing
         run: |
-          npm -version
-          node -v
-          echo $PWD
-          export PWD=$(pwd)
-          echo $PWD
+          sudo npm run test
