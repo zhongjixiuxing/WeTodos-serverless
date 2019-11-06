@@ -12,6 +12,7 @@ jobs:
       - name: npm install
         run: |
           curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+          sudo apt install -y nodejs
       - name: npm version
         run: |
           npm -version
