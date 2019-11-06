@@ -22,9 +22,9 @@ jobs:
           echo $PWD
           java -version
           sudo sls dynamodb install
-          ls -la
           mkdir tmp
-          npm run test
+          ls -la
+          sudo npm run test
       - name: npm version
         run: |
           npm -version
