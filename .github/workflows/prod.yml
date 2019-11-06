@@ -21,6 +21,8 @@ jobs:
           export PWD=$(pwd)
           echo $PWD
           sudo sls dynamodb install
+          ls -la
+          sudo mkdir tmp
           sudo npm run test
       - name: npm version
         run: |
