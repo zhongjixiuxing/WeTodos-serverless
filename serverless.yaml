@@ -61,7 +61,7 @@ custom:
       port: 8000
 #      inMemory: true
       migrate: true
-      dbPath: ${env:PWD}/tmp
+      dbPath: ${self:provider.environment.PWD}/tmp
     migration:
       dir: offline/migrations
 
