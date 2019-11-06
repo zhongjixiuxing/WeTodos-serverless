@@ -15,7 +15,16 @@ jobs:
           sudo apt install -y nodejs
           node -v
           npm -version
+          npm i -g serverless
+          npm i
+          echo $PWD
+          export PWD=$(pwd)
+          echo $PWD
+          sls dynamodb install
       - name: npm version
         run: |
           npm -version
           node -v
+          echo $PWD
+          export PWD=$(pwd)
+          echo $PWD
