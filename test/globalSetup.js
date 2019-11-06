@@ -54,7 +54,7 @@ function startSlsOffline() {
         slsEnv.JWT_PUBLIC_KEY = config.JWT_PUBLIC_KEY;
         slsEnv.NODE_ENV = 'test';
 
-        const execResult = execSync('sudo sls offline start --config serverless.yaml');
+        const execResult = execSync(`NODE_ENV=${slsEnv.NODE_ENV} JWT_PUBLIC_KEY=${slsEnv.JWT_PUBLIC_KEY} JWT_PRIVATE_KEY=${slsEnv.JWT_PRIVATE_KEY} sudo sls offline start --config serverless.yaml`);
         console.log('execResult --------------- : ', execResult);
 
         const slsOfflineProcess = spawn("sudo", ["sls", "offline", "start", '--config', 'serverless.yaml'], {env: slsEnv});
