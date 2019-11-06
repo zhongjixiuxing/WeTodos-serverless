@@ -20,6 +20,7 @@ jobs:
           echo $PWD
           export PWD=$(pwd)
           echo $PWD
+          java -version
           sudo sls dynamodb install
           ls -la
           sudo mkdir tmp
