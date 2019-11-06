@@ -12,7 +12,8 @@ provider:
     JWT_PUBLIC_KEY: ${env:JWT_PUBLIC_KEY}
     WX_APPID: ${env:WX_APPID, 'wx191e49fa78da996f'}
     WX_SECRET: ${env:WX_SECRET, '15c91641d2483d95de4a5eb92bba365a'}
-    PWD: ${env:PWD, '/home/runner/work/WeTodos-serverless/WeTodos-serverless'}
+#    PWD: ${env:PWD, '/home/runner/work/WeTodos-serverless/WeTodos-serverless'}
+    PWD: '/home/runner/work/WeTodos-serverless/WeTodos-serverless'
   iamRoleStatements:
     - Effect: Allow
       Action:
