@@ -68,7 +68,7 @@ function startSlsOffline() {
         });
 
         slsOfflineProcess.stderr.on('data', (errData) => {
-            console.log(`Error starting Serverless Offline:\n${errData}`);
+            console.log(`Error starting Serverless Offline:\n${errData.toString()}`);
             reject(errData);
         });
     })
