@@ -10,26 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: npm install
-        uses: docker://anxing131/wetodos-cicd-base-img
-        with:
-          args: npm install
-      - name: cp dynamodb
-        uses: docker://anxing131/wetodos-cicd-base-img
-        with:
-          args: cp -R /WeTodos-serverless/.dynamodb .
-      - name: mkdir tmp dir
-        uses: docker://anxing131/wetodos-cicd-base-img
-        with:
-          args: java -version
-      - name: java env
-        uses: docker://anxing131/wetodos-cicd-base-img
-        with:
-          args: env
-      - name: testing
-        uses: docker://anxing131/wetodos-cicd-base-img
-        with:
-          args: JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64  JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre CLASSPATH=.:/usr/lib/jvm/java-8-openjdk-amd64/lib:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib npm run start
-#      - name: install dynamodb
-#        run: sls dynamodb install
-#      - name: testing
-#        run: npm run test
+        run: |
+          curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+      - name: npm version
+        run: |
+          npm -version
