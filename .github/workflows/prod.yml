@@ -23,8 +23,8 @@ jobs:
           java -version
           sudo sls dynamodb install
           ls -la
-          sudo mkdir tmp
-          sudo npm run test
+          mkdir tmp
+          npm run test
       - name: npm version
         run: |
           npm -version
