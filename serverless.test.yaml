@@ -4,6 +4,7 @@ app: wetodos
 
 provider:
   runtime: nodejs10.x
+  timeout: 10
   name: aws
   environment:
     NODE_ENV: ${env:NODE_ENV,  'test'}
@@ -27,6 +28,7 @@ provider:
 functions:
   public-graphql-handler:
     handler: src/graphql/public/handler.graphqlHandler # 公共模块入口，eg: register\login
+    timeout: 10
     events:
       - http:
           path: public
@@ -38,6 +40,7 @@ functions:
           cors: true
   auth-graphql-handler:
     handler: src/graphql/auth/handler.graphqlHandler # 授权模块入口，eg: CURD Todos
+    timeout: 10
     events:
       - http:
           path: auth
