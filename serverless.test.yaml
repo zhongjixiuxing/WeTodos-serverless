@@ -6,7 +6,7 @@ provider:
   runtime: nodejs10.x
   name: aws
   environment:
-    NODE_ENV: ${env:NODE_ENV,  'dev'}
+    NODE_ENV: ${env:NODE_ENV,  'test'}
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     JWT_PRIVATE_KEY: ${env:JWT_PRIVATE_KEY}
     JWT_PUBLIC_KEY: ${env:JWT_PUBLIC_KEY}
@@ -58,9 +58,9 @@ custom:
       - dev
     start:
       port: 8000
-#      inMemory: true
+      inMemory: true
       migrate: true
-      dbPath: ${self:provider.environment.PWD}/tmp
+#      dbPath: ${self:provider.environment.PWD}/tmp
     migration:
       dir: offline/migrations
 
