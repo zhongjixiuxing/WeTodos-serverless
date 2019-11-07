@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:
+      - dev
+name: Deploy to dev environment
+jobs:
+  testing:
+    name: testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@dev
+      - name: setup environment
+        run: |
+          curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+          sudo apt install -y nodejs
+          sudo npm i -g serverless
+          sudo npm i
+          export PWD=$(pwd)
+          sudo sls dynamodb install
+          sudo mkdir -p tmp
+      - name: testing
+        run: |
+          sudo npm run test
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@dev
+      - name: npm install
+        uses: actions/npm@master
+        with:
+          args: install
+      - name: serverless deploy
+        uses: serverless/github-action@master
+        with:
+          args: deploy --config serverless.dev.yaml
+        env:
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
