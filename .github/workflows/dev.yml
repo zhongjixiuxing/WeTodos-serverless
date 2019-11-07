@@ -8,7 +8,9 @@ jobs:
     name: testing
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@dev
+      - uses: actions/checkout@master
+        with:
+          ref: dev
       - name: setup environment
         run: |
           curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
