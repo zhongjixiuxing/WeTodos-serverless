@@ -1,12 +1,19 @@
 
-
 # WeTodos Serverless
 
 WeTodos wechat mini-program 后台服务项目
 
 [微信小程序客户端体验程序](https://github.com/zhongjixiuxing/WeTodos-miniprogram)：
 
-<img align="left" width="150" height="150" src="https://ae01.alicdn.com/kf/Ha2cefce2dde94730ab017ceb910f5e99H.jpg">
+<img align="left" width="150" height="150" src="https://ae01.alicdn.com/kf/Ha2cefce2dde94730ab017ceb910f5e99H.jpg" />
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 
 
@@ -23,7 +30,7 @@ WeTodos wechat mini-program 后台服务项目
 * **AWS Cloud Services** (Lambda、Dynamodb、Apigateway、S3、CloudFormation、CloudWatch)
 
 * **Cloudflare** (Domain DNS Service)
-
+<br/>
   
 
 ## Setup
@@ -32,7 +39,7 @@ WeTodos wechat mini-program 后台服务项目
 $ npm i
 $ npm i -g serverless
 ```
-
+<br/>
 
 
 ## Startup (local)
@@ -40,7 +47,7 @@ $ npm i -g serverless
 ```shell
 $ npm run start 
 ```
-
+<br/>
 
 
 ## Testing
@@ -48,20 +55,20 @@ $ npm run start
 ```shell
 $ npm run test
 ```
-
+<br/>
 
 
 ## Deploy to AWS Cloud
 ```shell
 $ serverless deploy --config serverless.prod.yaml
 ```
-
+<br/>
 
 
 ## Todos
     - [] jest, dynamodb don't restart, should be clear table rows
 
-
+<br/>
 
 ## ISSUES
 - [aws apigateway custom domain setting](https://medium.com/@maciejtreder/custom-domain-in-aws-api-gateway-a2b7feaf9c74)
