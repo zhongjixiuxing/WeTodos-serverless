@@ -4,9 +4,13 @@
 
 WeTodos wechat mini-program 后台服务项目
 
+[微信小程序客户端体验程序](https://github.com/zhongjixiuxing/WeTodos-miniprogram)：
+
+<img align="left" width="150" height="150" src="https://ae01.alicdn.com/kf/Ha2cefce2dde94730ab017ceb910f5e99H.jpg">
 
 
-##技术栈
+
+## 技术栈
 
 * **Nodejs10.x** + (Basic programming language)
 
@@ -29,14 +33,35 @@ $ npm i
 $ npm i -g serverless
 ```
 
+
+
 ## Startup (local)
 3000(apollo server) and 8000 (local dynamodb) port will be using!
 ```shell
 $ npm run start 
 ```
 
+
+
+## Testing
+
+```shell
+$ npm run test
+```
+
+
+
+## Deploy to AWS Cloud
+```shell
+$ serverless deploy --config serverless.prod.yaml
+```
+
+
+
 ## Todos
     - [] jest, dynamodb don't restart, should be clear table rows
+
+
 
 ## ISSUES
 - [aws apigateway custom domain setting](https://medium.com/@maciejtreder/custom-domain-in-aws-api-gateway-a2b7feaf9c74)
