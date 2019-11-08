@@ -7,7 +7,7 @@ provider:
   timeout: 10
   stage: 'dev'
   name: aws
-#  region: ap-east-1 # default is us-east-1
+#  region: ap-southeast-1 # default is us-east-1
   environment:
     NODE_ENV: ${self:provider.stage,  'dev'}
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
@@ -36,9 +36,11 @@ package:
     - test/**
     - .idea
     - .git
+    - .github/**
     - serverless.yaml
     - serverless.yml
     - serverless.prod.yaml
+    - serverless.test.yaml
     - package-lock.json
     - logs
     - Dockerfile

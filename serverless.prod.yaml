@@ -37,11 +37,17 @@ package:
     - test/**
     - .idea
     - .git
+    - .github/**
     - serverless.yaml
+    - serverless.yml
+    - serverless.dev.yaml
+    - serverless.prod.yaml
+    - serverless.test.yaml
     - logs
     - Dockerfile
     - ssh/**
     - README.md
+    - Readme.md
 
 functions:
   public-graphql-handler:
