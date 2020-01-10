@@ -38,6 +38,8 @@ WeTodos wechat mini-program 后台服务项目
 ```shell
 $ npm i
 $ npm i -g serverless
+$ sls dynamodb install  
+$ npm run start
 ```
 <br/>
 

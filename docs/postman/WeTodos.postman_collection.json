@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "7edf48b7-178a-4fa0-be01-7d9cd3d2b2a1",
+		"name": "WeTodos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "caae08da-9d48-48ad-881f-0d202674c75f",
+								"exec": [
+									"/**",
+									" * ",
+									" * mutation { ",
+									"    register(name: \"anxing\", password: \"anxing\") {",
+									"        id,",
+									"        name",
+									"    }",
+									"    ",
+									"}*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n    register(name: \"anxing\", password: \"anxing123\") {\n        id,\n        name\n    }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/public",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"public"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "caae08da-9d48-48ad-881f-0d202674c75f",
+								"exec": [
+									"/**",
+									" * ",
+									" * mutation { ",
+									"    register(name: \"anxing\", password: \"anxing\") {",
+									"        id,",
+									"        name",
+									"    }",
+									"    ",
+									"}*/"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "db26191a-0236-41cf-9b69-a1f52bb12865",
+								"exec": [
+									"const respBody = JSON.parse(responseBody);",
+									"",
+									"pm.environment.set(\"TOKEN\", respBody.data.login.token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n    login(name: \"anxing\", password: \"anxing123\") {\n        id,\n        name,\n        token\n    }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/public",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"public"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "wechat login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "caae08da-9d48-48ad-881f-0d202674c75f",
+								"exec": [
+									"/**",
+									" * ",
+									" * mutation { ",
+									"    register(name: \"anxing\", password: \"anxing\") {",
+									"        id,",
+									"        name",
+									"    }",
+									"    ",
+									"}*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n    wxLogin(code: \"anxing\") {\n        id,\n        token\n    }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/public",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"public"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "get lists",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "caae08da-9d48-48ad-881f-0d202674c75f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ($query: GetListQuery!) {\n    getLists (query: $query){\n        offset\n        limit\n        count\n        lists{\n            id\n            gid\n            name\n        }\n        LastEvaluatedKey\n    }\n}",
+								"variables": "{\n\t\"query\": {}\n}"
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get tasts",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "caae08da-9d48-48ad-881f-0d202674c75f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ($query: GetTaskQuery!) {\n    getTasks (query: $query){\n        offset\n        limit\n        count\n        tasks{\n            id\n            name\n        }\n        LastEvaluatedKey\n    }\n}",
+								"variables": "{\n\t\"query\": {}\n}"
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create list",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "caae08da-9d48-48ad-881f-0d202674c75f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation ($list: ListInput!) {\n    createList (list: $list){\n        id\n    }\n}",
+								"variables": "{\n\t\"list\": {\n        \"id\": \"list-id-001-create\",\n        \"name\": \"list-name\",\n        \"gid\": \"none\",\n        \"createdAt\": \"2019-09-29T14:09:06.070Z\",\n        \"taskCount\": 0,\n        \"theme\": {\n            \"type\": \"color\",\n            \"value\": \"#ffffff\"\n        }\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create task",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "caae08da-9d48-48ad-881f-0d202674c75f",
+								"exec": [
+									"/**",
+									" * ",
+									" * mutation { ",
+									"    register(name: \"anxing\", password: \"anxing\") {",
+									"        id,",
+									"        name",
+									"    }",
+									"    ",
+									"}*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation ($task: TaskInput!) {\n    createTask (task: $task){\n        id\n        name\n    }\n}",
+								"variables": "{\n\t\n\t\"task\": {\n        \"id\": \"task-001\",\n        \"lid\": \"list-00x\",\n        \"name\": \"task-name-00\",\n        \"state\": \"pending\",\n        \"type\": \"\",\n        \"important\": true,\n        \"steps\": [],\n        \"expireDay\": 0,\n        \"isMyday\": false,\n        \"comment\": \"task-comment\",\n        \"createdAt\": \"2019-09-29T14:09:06.070Z\",\n        \"updatedAt\": \"2019-09-29T14:09:06.070Z\",\n        \"repeat\": \"\"\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "多个 action 操作 eg",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "caae08da-9d48-48ad-881f-0d202674c75f",
+								"exec": [
+									"/**",
+									" * ",
+									" * mutation { ",
+									"    register(name: \"anxing\", password: \"anxing\") {",
+									"        id,",
+									"        name",
+									"    }",
+									"    ",
+									"}*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n    register(name: \"anxing\", password: \"anxing123\") {\n        id,\n        name\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/public",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"public"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "readme",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "# how to setting postman\n[postman graphql learning docs](https://learning.getpostman.com/docs/postman/sending-api-requests/graphql/)"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
